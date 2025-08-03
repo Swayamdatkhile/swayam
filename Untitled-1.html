@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>What Can JavaScript Do?</h2>
+
+<p id="demo">JavaScript can change HTML content.</p>
+
+<button type="button" onclick='document.getElementById("demo").innerHTML = "Hello JavaScript!"'>Click Me!</button>
+
+<br><br>
+
+<!-- Button to Start Camera -->
+<button onclick="startCamera()">Access Camera</button>
+
+<!-- Video Preview -->
+<video id="cameraFeed" width="320" height="240" autoplay style="display:none;"></video>
+
+<script>
+function startCamera() {
+  // Ask for camera access
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function(stream) {
+      // Show the video element
+      document.getElementById("cameraFeed").style.display = "block";
+      // Set the stream to the video element
+      document.getElementById("cameraFeed").srcObject = stream;
+      document.getElementById("demo").innerHTML = "Camera Access Granted!";
+    })
+    .catch(function(err) {
+      document.getElementById("demo").innerHTML = "Camera Access Denied: " + err;
+    });
+}
+</script>
+
+</body>
+</html>
